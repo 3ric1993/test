@@ -24,3 +24,16 @@ if [ "$answer" == "y" ]; then
 else
    echo "Deletion cancelled."
 fi
+
+#!/bin/bash
+
+# Create two folders
+mkdir folder1
+mkdir folder2
+
+# Create 10 files in each folder with a size of 10MB
+for i in {1..10}
+do
+  dd if=/dev/zero of=folder1/file$i bs=10M count=1
+  dd if=/dev/zero of=folder2/file$i bs=10M count=1
+done
