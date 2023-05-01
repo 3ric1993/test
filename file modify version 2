@@ -1,0 +1,40 @@
+#!/bin/bash
+
+while true; do
+  read -p "Enter the number of files to create (or 'q' to quit): " num_files
+  if [ "$num_files" == "q" ]; then
+    echo "Exiting..."
+    exit 0
+  elif [[ ! "$num_files" =~ ^[0-9]+$ ]]; then
+    echo "Invalid input, please enter a positive integer or 'q' to quit."
+  else
+    for ((i=1;i<=num_files;i++)); do
+      filename="file${i}.txt"  # create file name based on iteration
+      echo "This is file number $i" > "$filename"  # write content to file
+      echo "$filename created successfully!"  # print success message
+    done
+    break
+  fi
+done
+
+
+while true; do
+  read -p "Enter the number of files to delete (or 'q' to quit): " num_files
+  if [ "$num_files" == "q" ]; then
+    echo "Exiting..."
+    exit 0
+  elif [[ ! "$num_files" =~ ^[0-9]+$ ]]; then
+    echo "Invalid input, please enter a positive integer or 'q' to quit."
+  else
+    for ((i=1;i<=num_files;i++)); do
+      filename="file${i}.txt"  # create file name based on iteration
+      if [ -f "$filename" ]; then  # check if file exists
+        rm "$filename"  # delete file
+        echo "$filename deleted successfully!"  # print success message
+      else
+        echo "$filename does not exist, skipping."  # print message if file does not exist
+      fi
+    done
+    break
+  fi
+done
