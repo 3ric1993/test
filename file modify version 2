@@ -1,5 +1,21 @@
 #!/bin/bash
 
+#  create folders using the mkdir command
+for folder in "$@"
+do
+  mkdir "$folder"
+  echo "Folder created at $folder"
+done
+
+for folder in "$@"
+do
+  rm -rf "$folder"
+  echo "Folder deleted at $folder"
+done
+
+
+#!/bin/bash
+
 while true; do
   read -p "Enter the number of files to create (or 'q' to quit): " num_files
   if [ "$num_files" == "q" ]; then
@@ -38,3 +54,30 @@ while true; do
     break
   fi
 done
+
+
+
+#This script will execute a menu
+clear
+echo "Hello, This script will do something."
+echo "#########################################################"
+echo "####################### :- ) ############################"
+echo "#########################################################"
+echo "Please select one of the following options:"
+echo "  1. Create folders"
+echo "  2. Delete folders"
+echo "  3. Create files"
+echo "  4. Delete files"
+echo "  5. Exit"
+read -p "Enter your selection: " choice
+
+case $choice in
+  1) read -p "Enter folder name(s) (separated by spaces): " folders
+     create_folders $folders;;
+  2) read -p "Enter folder name(s) (separated by spaces): " folders
+     delete_folders $folders;;
+  3) create_files;;
+  4) delete_files;;
+  5) echo "Exiting..."; exit;;
+  *) echo "Invalid option, please choose a number from 1 to 5.";;
+esac
